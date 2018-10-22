@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BNETestLibrary;
+using BNETestLibrary.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,6 +12,18 @@ namespace BNETest.Controllers
     {
         public ActionResult Index()
         {
+
+            using (var context = new BNETestContext())
+            {
+                Student student = new Student
+                {
+                    Name = "Lucas"
+                };
+
+                context.Students.Add(student);
+                context.SaveChanges();
+            }
+
             return View();
         }
 
