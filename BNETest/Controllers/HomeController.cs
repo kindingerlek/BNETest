@@ -12,18 +12,6 @@ namespace BNETest.Controllers
     {
         public ActionResult Index()
         {
-
-            using (var context = new BNETestContext())
-            {
-                Student student = new Student
-                {
-                    Name = "Lucas"
-                };
-
-                context.Students.Add(student);
-                context.SaveChanges();
-            }
-
             return View();
         }
 
