@@ -25,7 +25,7 @@
             <div class="input-group">
                 <input type="text" class="form-control" id="inputName" placeholder="Eg: John" ng-model="Name">
                 <div class="input-group-append">
-                    <input type="button" id="btnSave" class="btn btn-primary" value="Submit" ng-click="Insert()" />
+                    <input type="button" id="btnSave" class="btn btn-primary" value="Submit" ng-click="Add()" />
                 </div>
             </div>
         </div>
@@ -45,16 +45,16 @@
                     </td>
                 </tr>
             </thead>
-            <tr class="d-flex" ng-repeat="Student in Students">
+            <tr class="d-flex" ng-repeat="student in students">
                 <td class="col-1 text-center">
-                    {{Student.Id}}
+                    {{student.Id}}
                 </td>
                 <td class="col-9">
-                    {{Student.Name}}
+                    {{student.Name}}
                 </td>
                 <td class="col-auto">
-                    <input type="button" class="btn btn-warning btn-sm" value="Update" ng-click="Update(Student)" />
-                    <input type="button" class="btn btn-danger btn-sm" value="Delete" ng-click="Delete(Student)" />
+                    <input type="button" class="btn btn-warning btn-sm" value="Update" ng-click="Update(student)" />
+                    <input type="button" class="btn btn-danger btn-sm" value="Delete" ng-click="Delete(student)" />
                 </td>
             </tr>
         </table>

@@ -1,4 +1,4 @@
-﻿using BNETestLibrary;
+﻿using BNETestLibrary.DataAccessObjects;
 using BNETestLibrary.Models;
 using System;
 using System.Collections.Generic;
@@ -16,94 +16,59 @@ namespace BNETest.Controllers
             return View();
         }
 
-        /// <summary>
-        /// Get All Students  
-        /// </summary>  
-        /// <returns>JsonResult</returns>  
         public JsonResult GetAll()
         {
-            using (BNETestContext context = new BNETestContext())
-            {
-                List<Student> student = context.Students.ToList();
-                return Json(student, JsonRequestBehavior.AllowGet);
+            using (var repo = new StudentsDAO())
+            {   
+                return Json(repo.GetAll(), JsonRequestBehavior.AllowGet);
             }
         }
 
-        /// <summary>  
-        /// Get Student by Id  
-        /// </summary>  
-        /// <param name="Id"></param>  
-        /// <returns>JsonResult</returns>  
-        public JsonResult GetById(string id)
+        public JsonResult Get(string id)
         {
-            using (BNETestContext context = new BNETestContext())
+            using (var repo = new StudentsDAO())
             {
-                int studentId = int.Parse(id);
-                return Json(context.Students.Find(studentId), JsonRequestBehavior.AllowGet);
+                return Json(repo.Get(int.Parse(id)), JsonRequestBehavior.AllowGet);
             }
         }
 
-        /// <summary>  
-        /// Insert new Student  
-        /// </summary>  
-        /// <param name="student"></param>  
-        /// <returns>bool</returns>  
-        public bool Insert(Student student)
+        public string Add(Student student)
         {
             if (student != null)
             {
-                using (BNETestContext context = new BNETestContext())
+                using (StudentsDAO repo = new StudentsDAO())
                 {
-                    context.Students.Add(student);
-                    context.SaveChanges();
-                    return true;
+                    repo.Add(student);
+                    return string.Format("The student {0} was added successfully!", student.Name);
                 }
             }
-            return false;
+            return string.Format("Unfortunately some issue occurred when trying add the new student");
         }
 
-        /// <summary>  
-        /// Delete student info  
-        /// </summary>  
-        /// <param name="student"></param>  
-        /// <returns></returns>  
-        public bool Delete(Student student)
+        public string Delete(Student student)
         {
             if (student != null)
             {
-                using (BNETestContext context = new BNETestContext())
+                using (StudentsDAO repo = new StudentsDAO())
                 {
-                    if (context.Entry(student).State == Microsoft.EntityFrameworkCore.EntityState.Detached)
-                    {
-                        context.Students.Attach(student);
-                        context.Students.Remove(student);
-                    }
-                    context.SaveChanges();
-                    return true;
+                    repo.Delete(student);
+                    return string.Format("The student {0} was removed successfully!", student.Name);
                 }
             }
-            return false;
+            return string.Format("Unfortunately some issue occurred when trying remove the selected student");
         }
 
-        /// <summary>  
-        /// Update Student Information  
-        /// </summary>  
-        /// <param name="updatedStudent"></param>  
-        /// <returns></returns>  
-        public bool Update(Student updatedStudent)
+        public string Update(Student student)
         {
-            if (updatedStudent != null)
+            if (student != null)
             {
-                using (BNETestContext context = new BNETestContext())
+                using (StudentsDAO repo = new StudentsDAO())
                 {
-                    var student = context.Students.FirstOrDefault(x => x.Id == updatedStudent.Id);
-                    student.Name = updatedStudent.Name;
-
-                    context.SaveChanges();
-                    return true;
+                    repo.Update(student);
+                    return string.Format("The student {0} was updated successfully!", student.Name);
                 }
             }
-            return false;
+            return string.Format("Unfortunately some issue occurred when trying update the selected student");
         }
     }
 }
