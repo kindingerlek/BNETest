@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using BNETestLibrary.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace BNETestLibrary.DataAccessObjects
 {
@@ -43,7 +44,7 @@ namespace BNETestLibrary.DataAccessObjects
 
         public IList<Student> GetAll()
         {
-            return context.Students.ToArray();
+            return context.Students.Include(student => student.Subjects).ToArray();
         }
 
         public void Update(Student s)

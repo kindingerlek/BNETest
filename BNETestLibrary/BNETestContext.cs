@@ -18,7 +18,8 @@ namespace BNETestLibrary
 
         private string GetConnectionString()
         {
-            return "Data Source=(LocalDB)\\MSSQLLocalDB;" +
+            return 
+                "Data Source=(LocalDB)\\MSSQLLocalDB;" +
                 "AttachDbFilename=|DataDirectory|\\DB.mdf;" +
                 "Integrated Security=True;" +
                 "Connection Timeout=30";

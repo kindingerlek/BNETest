@@ -2,6 +2,7 @@
 using BNETestLibrary.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -19,7 +20,7 @@ namespace BNETest.Controllers
         public JsonResult GetAll()
         {
             using (var repo = new StudentsDAO())
-            {   
+            {
                 return Json(repo.GetAll(), JsonRequestBehavior.AllowGet);
             }
         }

@@ -45,7 +45,7 @@ namespace BNETestLibrary.DataAccessObjects
         {
             return context.Subjects.ToArray();
         }
-
+        
         public void Update(Subject s)
         {
             context.Subjects.Update(s);
