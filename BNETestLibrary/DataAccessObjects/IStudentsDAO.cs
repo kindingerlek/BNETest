@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BNETestLibrary.DataAccessObjects
 {
-    interface IStudentDAO
+    interface IStudentsDAO
     {
         IList<Student> GetAll();
         Student Get(int i);

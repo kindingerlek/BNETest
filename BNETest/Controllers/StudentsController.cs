@@ -36,39 +36,39 @@ namespace BNETest.Controllers
         {
             if (student != null)
             {
-                using (StudentsDAO repo = new StudentsDAO())
+                using (var repo = new StudentsDAO())
                 {
                     repo.Add(student);
-                    return string.Format("The student {0} was added successfully!", student.Name);
+                    return $"The student {student.Name} was added successfully!";
                 }
             }
-            return string.Format("Unfortunately some issue occurred when trying add the new student");
+            return "Unfortunately some issue occurred when trying add the new student";
         }
 
         public string Delete(Student student)
         {
             if (student != null)
             {
-                using (StudentsDAO repo = new StudentsDAO())
+                using (var repo = new StudentsDAO())
                 {
                     repo.Delete(student);
-                    return string.Format("The student {0} was removed successfully!", student.Name);
+                    return $"The student {student.Name} was removed successfully!";
                 }
             }
-            return string.Format("Unfortunately some issue occurred when trying remove the selected student");
+            return "Unfortunately some issue occurred when trying remove the selected student";
         }
 
         public string Update(Student student)
         {
             if (student != null)
             {
-                using (StudentsDAO repo = new StudentsDAO())
+                using (var repo = new StudentsDAO())
                 {
                     repo.Update(student);
-                    return string.Format("The student {0} was updated successfully!", student.Name);
+                    return $"The student {student.Name} was updated successfully!";
                 }
             }
-            return string.Format("Unfortunately some issue occurred when trying update the selected student");
+            return "Unfortunately some issue occurred when trying update the selected student";
         }
     }
 }

@@ -1,0 +1,68 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<script src="~/Scripts/app/subjectsCtrl.js"></script>
+
+<style>
+    .btn-space {
+        margin-left: -5%;
+        background-color: cornflowerblue;
+        font-size: large;
+    }
+</style>
+
+<div ng-app="myApp">
+    <div ng-controller="subjectsCtrl" ng-init="GetAll()" class="divList">
+
+        <h3 class="mt-3">
+            <span id="spn">Add New Subject</span>
+        </h3>
+
+
+        <!-- Another variation with a button -->
+        <div class="mb-5 mt-3" role="form">
+            <label for="inputName">The Subject's title:</label>
+            <div class="input-group">
+                <input type="text" class="form-control" id="inputName" placeholder="Eg: Math" ng-model="Name">
+                <div class="input-group-append">
+                    <input type="button" id="btnSave" class="btn btn-primary" value="Submit" ng-click="Add()" />
+                </div>
+            </div>
+        </div>
+
+
+        <table cellpadding="12" class="table table-sm table-striped table-hover">
+            <thead>
+                <tr class="d-flex">
+                    <td class="col-1 text-center">
+                        <b>ID</b>
+                    </td>
+                    <td class="col-9">
+                        <b>Title</b>
+                    </td>
+                    <td class="col-2">
+                        <b>Actions</b>
+                    </td>
+                </tr>
+            </thead>
+            <tr class="d-flex" ng-repeat="subject in subjects">
+                <td class="col-1 text-center">
+                    {{subject.Id}}
+                </td>
+                <td class="col-9">
+                    {{subject.Name}}
+                </td>
+                <td class="col-auto">
+                    <input type="button" class="btn btn-warning btn-sm" value="Update" ng-click="Update(subject)" />
+                    <input type="button" class="btn btn-danger btn-sm" value="Delete" ng-click="Delete(subject)" />
+                </td>
+            </tr>
+        </table>
+
+    </div>
+
+    @Html.Hidden("SubjectID")
+
+</div>
+
+

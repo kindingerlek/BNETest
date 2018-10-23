@@ -1,32 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
+using System.Linq;
 using BNETestLibrary.Models;
 
 namespace BNETestLibrary.DataAccessObjects
 {
-    public class StudentsDAO : IDisposable, IStudentsDAO
+    public class SubjectsDAO : IDisposable, ISubjectsDAO
     {
         BNETestContext context;
 
-        public StudentsDAO()
+        public SubjectsDAO()
         {
             context = new BNETestContext();
         }
 
-        public void Add(Student s)
+        public void Add(Subject s)
         {
-            context.Students.Add(s);
+            context.Subjects.Add(s);
             context.SaveChanges();
         }
 
-        public void Delete(Student s)
+        public void Delete(Subject s)
         {
             if (context.Entry(s).State == Microsoft.EntityFrameworkCore.EntityState.Detached)
             {
-                context.Students.Attach(s);
-                context.Students.Remove(s);
+                context.Subjects.Attach(s);
+                context.Subjects.Remove(s);
             }
             context.SaveChanges();
         }
@@ -36,20 +36,22 @@ namespace BNETestLibrary.DataAccessObjects
             context.Dispose();
         }
 
-        public Student Get(int i)
+        public Subject Get(int i)
         {
-            return context.Students.Find(i);
+            return context.Subjects.Find(i);
         }
 
-        public IList<Student> GetAll()
+        public IList<Subject> GetAll()
         {
-            return context.Students.ToArray();
+            return context.Subjects.ToArray();
         }
 
-        public void Update(Student s)
+        public void Update(Subject s)
         {
-            context.Students.Update(s);
+            context.Subjects.Update(s);
             context.SaveChanges();
         }
+
     }
+
 }

@@ -9,11 +9,19 @@ namespace BNETestLibrary
     public class BNETestContext : DbContext
     {
         public DbSet<Student> Students { get; set; }
-        //public DbSet<Subject> Subjects { get; set; }
+        public DbSet<Subject> Subjects { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\DB.mdf;Integrated Security=True");
+            optionsBuilder.UseSqlServer(GetConnectionString());
+        }
+
+        private string GetConnectionString()
+        {
+            return "Data Source=(LocalDB)\\MSSQLLocalDB;" +
+                "AttachDbFilename=|DataDirectory|\\DB.mdf;" +
+                "Integrated Security=True;" +
+                "Connection Timeout=30";
         }
     }
 }
