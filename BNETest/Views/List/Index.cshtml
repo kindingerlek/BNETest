@@ -1,7 +1,7 @@
 ﻿@{
     ViewBag.Title = "Index";
 }
-<script src="~/Scripts/app/studentsCtrl.js"></script>
+<script src="~/Scripts/app/listCtrl.js"></script>
 
 <style>
     .btn-space {
@@ -12,28 +12,51 @@
 </style>
 
 <div ng-app="myApp">
-    <div ng-controller="studentsCtrl" ng-init="GetAll()" class="divList">
+    <div ng-controller="listCtrl" ng-init="Init()" class="divList">
 
     <h3 class="mt-3">
         <span id="spn">Students Subjects</span>
     </h3>
 
+    <div role="form" ng-show="updatingStudent">
+        <div>
+            <span>Add subjects to: {{student.Name}}</span>
+        </div>
+
+        <div class="form-check" ng-repeat="subject in freeSubjects">
+            <input class="form-check-input" type="checkbox" data-ng-model="selected[subject.Id]" />
+
+            <label class="form-check-label" for="{{subject.Id}}">
+                {{subject.Name}}
+            </label>
+        </div>
+
+        <div class="form-group">
+            <input type="button" id="btnSave" class="btn btn-primary" value="Submit" ng-click="Add()" />
+        </div>
+    </div>
+
     <table cellpadding="12" class="table table-sm table-striped table-hover">
         <thead>
             <tr class="d-flex">
-                <td class="col-6"><b> Student </b></td>
-                <td class="col-6"><b> Subjects</b></td>
+                <td class="col-5"><b> Student </b></td>
+                <td class="col-5"><b> Subjects</b></td>
+                <td class="col-2"><b> Actions</b></td>
             </tr>
         </thead>
         <tr class="d-flex" ng-repeat="student in students">
-            <td class="col-6">
+            <td class="col-5">
                 {{student.Name}}
             </td>
 
-            <td class="col-6">
+            <td class="col-5">
                 <span ng-repeat="subject in student.Subjects">
                     {{subject.Name}}
                 </span>
+            </td>
+
+            <td>
+                <input type="button" class="btn btn-warning btn-sm" value="Update" ng-click="Update(student)" />
             </td>
         </tr>
 

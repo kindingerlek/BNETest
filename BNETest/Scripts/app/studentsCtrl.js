@@ -19,14 +19,14 @@ app.controller("studentsCtrl", function ($scope, $http) {
             })
 
         } else {
-            $scope.students = {};
-            $scope.students.Name = $scope.Name;
-            $scope.students.Id = document.getElementById("StudentID").value;
+            $scope.student = {};
+            $scope.student.Name = $scope.Name;
+            $scope.student.Id = document.getElementById("StudentID").value;
             $http({
                 method: "post",
                 url: "http://localhost:62037/Students/Update",
                 datatype: "json",
-                data: JSON.stringify($scope.students)
+                data: JSON.stringify($scope.student)
             }).then(function (response) {
                 $scope.GetAll();
                 $scope.Name = "";

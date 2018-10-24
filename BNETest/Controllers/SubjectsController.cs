@@ -20,6 +20,14 @@ namespace BNETest.Controllers
         {
             using (var repo = new SubjectsDAO())
             {
+                return Json(repo.GetAll(), JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public JsonResult GetAllFree()
+        {
+            using (var repo = new SubjectsDAO())
+            {
                 return Json(repo.GetAllFree(), JsonRequestBehavior.AllowGet);
             }
         }
