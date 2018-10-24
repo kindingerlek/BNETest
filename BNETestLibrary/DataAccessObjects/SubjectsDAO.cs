@@ -45,7 +45,12 @@ namespace BNETestLibrary.DataAccessObjects
         {
             return context.Subjects.ToArray();
         }
-        
+
+        public IList<Subject> GetAllFree()
+        {
+            return context.Subjects.Where(x => x.StudentID == null).ToArray();
+        }
+
         public void Update(Subject s)
         {
             context.Subjects.Update(s);
